@@ -27,7 +27,7 @@ class App extends Component {
       text: message,
     };
     this.setState((currentState) => ({
-      messages: currentState.messages.push(newMessage)
+      messages: currentState.messages.concat(newMessage)
     }));
   }
 

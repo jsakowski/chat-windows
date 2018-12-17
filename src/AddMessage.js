@@ -22,7 +22,11 @@ class AddMessage extends Component {
     return this.state.message === '';
   };
 
-  handleSu
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.onAddMessage(this.state.message);
+  }
+
   render () {
     return (
       <div>
