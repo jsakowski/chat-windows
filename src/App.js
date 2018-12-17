@@ -12,22 +12,28 @@ The instructions are included in the `instructions.md` file.
 
 const users = [{ username: 'Amy' }, { username: 'John' }];
 
-const messages = [
-  { username: 'Amy', text: 'Hi, Jon!' },
-  { username: 'Amy', text: 'How are you?' },
-  { username: 'John', text: 'Hi, Amy! Good, you?' },
-];
-
 class App extends Component {
-  /*
-  If the user did not type anything, he/she should not be
-  allowed to submit.
-  */
-  isDisabled = () => {
-    return false;
-  };
+  state = {
+    messages: [
+      { username: 'Amy', text: 'Hi, Jon!' },
+      { username: 'Amy', text: 'How are you?' },
+      { username: 'John', text: 'Hi, Amy! Good, you?' },
+   ]
+  }
+
+  addMessage = (username, message) => {
+    const newMessage = {
+      username: username,
+      text: message,
+    };
+    this.setState((currentState) => ({
+      messages: currentState.messages.push(newMessage)
+    }));
+  }
 
   render() {
+    const { messages } = this.state
+
     return (
       <div className="App">
         <header className="App-header">
@@ -40,7 +46,8 @@ class App extends Component {
               <ChatWindow 
                 key={user.username} 
                 user={user} 
-                messages={messages} />
+                messages={messages}
+                onAddMessage={this.addMessage}/>
             ))
           }
         </div>
